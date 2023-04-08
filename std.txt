@@ -1,0 +1,49 @@
+op8 format:
+ - 1st byte is op type
+ - 2nd byte is op number
+ - 3rd-... bytes are arguments (arg len is 1, 2, 3 or 4)
+
+ Types bind:
+  RANGE   DESCRIPTION     ARG   LEN
+
+  00-1f  system opcodes    0     2
+  20-3f  system opcodes    1   4..=8
+  40-5f  system opcodes    2   6..=8
+  60-6f  system opcodes    3     8
+  70-7f     reserved       -     -
+               ---
+  80-9f   user opcodes     0     2
+  a0-bf   user opcodes     1   2..=6
+  c0-df   user opcodes     2   4..=8
+  e0-ff   user opcodes     3   6..=8
+
+  RANGE   DESCRIPTION     ARG   LEN
+
+ Args bind (registers: P - public/exposed, E - special, R - readonly):
+  SYNTAX                    DESCRIPTION
+           Common system registers
+   00..=06     -     [P] Function arguments      (fa0, .., fa6)
+     =07       -     [P] Function current stack  (sc)
+     =08       -     [R] Function previous stack (sp)
+   10..=18     -         Local registers         (r0, .., r8)
+     =19       -         syscall number          (SYS)
+     =1a       -     [R] boolean result          (CMP)
+     =1b       -     [R] signal (unused)         (SIG)
+     =1c       -     [R] register # to write     (WRR)
+     =1d       -     [R] u32 value               (E1)
+     =1e       -     [R] another u32 value       (E2)
+     =1f       -     [R] u64 value by E1 & E2    (E3)
+   20..=2f     -         reserved
+         Address of system register
+   30..=59     -
+        Address with positive offset
+   60..=89 00..=ff
+        Address with negative offset
+   90..=bf 00..=ff
+
+                   Values
+    =c0   00..=ff     -    u8  value
+    =c1   00..=ff 00..=ff  u16 value
+    =c2   00..=ff 00..=ff
+          00..=ff 00..=ff  u32 value
+  SYNTAX                    DESCRIPTION

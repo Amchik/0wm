@@ -1,0 +1,53 @@
+; === 0WM CORE DECLARATIONS ===
+.reg fa0 0
+.reg fa1 1
+.reg fa2 2
+.reg fa3 3
+.reg fa4 4
+.reg fa5 5
+.reg fa6 6
+.reg sc  7
+.reg sp  8
+; ... reserved ...
+.reg r0  10h
+.reg r1  11h
+.reg r2  12h
+.reg r3  13h
+.reg r4  14h
+.reg r5  15h
+.reg r6  16h
+.reg r7  17h
+.reg r8  18h
+.reg SYS 19h
+.reg CMP 1ah
+; in std SIG register is 0x1b, but it currently unused
+; in current 0wm version SIG register is fa0
+.reg SIG 0
+.reg WRR 1ch
+.reg e1  1dh
+.reg e2  1eh
+.reg e3  1fh
+; registers 20h..2fh is reserved
+
+; opcodes taken from 0wm.rt library
+.opcode die 0
+.opcode ret 1
+.opcode call 2000h
+.opcode jmp  2001h
+.opcode jme  2002h
+; PRNT opcode is just debug opcode
+; in future in may be removed
+.opcode prnt 2100h
+.opcode mov  4000h
+.opcode add  4001h
+.opcode sub  4002h
+.opcode mul  4003h
+.opcode div  4004h
+.opcode imul 4005h
+.opcode idiv 4006h
+.opcode shr  4007h
+.opcode shl  4008h
+.opcode and  4009h
+.opcode or   400ah
+.opcode xor  400bh
+
